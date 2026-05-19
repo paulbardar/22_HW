@@ -15,7 +15,7 @@ MyTime::MyTime()
 
 }
 
-MyTime::MyTime(int hour, int minutes, int seconds, bool format)
+MyTime::MyTime(int hour, int minutes, int seconds, bool format = true)
 {
 	this->hour = hour;
 	this->minutes = minutes;
@@ -33,6 +33,10 @@ void MyTime::showTime() const
 
 	if (this->format) {
 		cout << this->hour << ":" << this->minutes << ":" << this->seconds << endl;
+	}
+	else {
+		string period = (this->hour < 12) ? "AM" : "PM";
+		cout  << this->hour % 12 << ":" << this->minutes << ":" << this->seconds << " " << period << endl;
 	}
 }
 
