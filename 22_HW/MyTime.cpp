@@ -23,20 +23,126 @@ MyTime::MyTime(int hour, int minutes, int seconds, bool format = true)
 	this->format = format;
 }
 
-void MyTime::setFormat(bool format24)
+void MyTime::setFormat(bool format)
 {
-	this->format = format24;
+	this->format = format;
+}
+
+bool MyTime::getFormat() const
+{
+	return format;
+}
+
+bool MyTime::valid() const
+{
+	return (this->hour >= 0 && this->hour < 24) &&
+		(this->minutes >= 0 && this->minutes < 60) &&
+		(this->seconds >= 0 && this->seconds < 60);
+}
+
+void MyTime::tickTime()
+{
+	this->seconds++;
+	if (this->seconds >= 60) {
+		this->seconds = 0;
+		this->minutes++;
+		if (this->minutes >= 60) {
+			this->minutes = 0;
+			this->hour++;
+			if (this->hour >= 24) {
+				this->hour = 0;
+			}
+		}
+	}
+}
+
+void MyTime::untickTime()
+{
+	this->seconds--;
+	if (this->seconds < 0) {
+		this->seconds = 59;
+		this->minutes--;
+		if (this->minutes < 0) {
+			this->minutes = 59;
+			this->hour--;
+			if (this->hour < 0) {
+				this->hour = 23;
+			}
+		}
+	}
+}
+
+void MyTime::setHour(int hour)
+{
+	if (hour >= 0 && hour < 24) {
+		this->hour = hour;
+	}
+	else {
+		int total_hours = this->hour + hour;
+		this->hour = total_hours % 24;
+	}
+}
+
+int MyTime::getHour() const
+{
+	return hour;
+}
+
+void MyTime::setMinutes(int minutes)
+{
+	if (minutes >= 0 && minutes < 60) {
+		this->minutes = minutes;
+	}
+	else {
+		int total_minutes = this->minutes + minutes;
+		int extra_hours = total_minutes / 60;
+		this->minutes = total_minutes % 60;
+		if (extra_hours > 0) {
+			setHour(extra_hours);
+		}
+		
+	}
+}
+
+int MyTime::getMinutes() const
+{
+	return minutes;
+}
+
+void MyTime::setSeconds(int seconds)
+{
+	if (seconds >= 0 && seconds < 60) {
+		this->seconds = seconds;
+	}
+	else {
+		int total_seconds = this->seconds + seconds;
+
+		int extra_minutes = total_seconds / 60; 
+		this->seconds = total_seconds % 60;     
+
+		if (extra_minutes > 0) {
+			setMinutes(this->minutes + extra_minutes); 
+		}
+	}
+}
+
+int MyTime::getSeconds() const
+{
+	return seconds;
 }
 
 void MyTime::showTime() const
 {
-
+	cout << setfill('0');
 	if (this->format) {
-		cout << this->hour << ":" << this->minutes << ":" << this->seconds << endl;
+		cout << hour / 10 << hour % 10  << ":" << minutes / 10 << minutes % 10 << ":" 
+			<< seconds / 10 << seconds % 10 << endl;
 	}
 	else {
-		string period = (this->hour < 12) ? "AM" : "PM";
-		cout  << this->hour % 12 << ":" << this->minutes << ":" << this->seconds << " " << period << endl;
+		string period = (hour < 12) ? "AM" : "PM";
+		cout << hour % 12 << ":" << minutes / 10 << minutes % 10 << ":"
+			<< seconds / 10 << seconds % 10 << " " << period << endl;
+		//cout  << hour << ":" << minutes << ":" << seconds << " " << period << endl;
 	}
 }
 
