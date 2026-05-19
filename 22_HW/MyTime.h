@@ -34,12 +34,14 @@ public:
 	void showTime()const;
 
 	//--------- Comparison operators ---------
-	bool operator == (const Time_& obj)const&;
-	bool operator != (const Time_& obj)const&;
-	bool operator > (const Time_& obj)const&;
-	bool operator < (const Time_& obj)const&;
-	bool operator >= (const Time_& obj)const&;
-	bool operator <= (const Time_& obj)const&;
+	bool operator == (const MyTime& obj)const&;
+	bool operator != (const MyTime& obj)const&;
+	bool operator > (const MyTime& obj)const&;
+	bool operator < (const MyTime& obj)const&;
+	bool operator >= (const MyTime& obj)const&;
+	bool operator <= (const MyTime& obj)const&;
+
+
 
 
 

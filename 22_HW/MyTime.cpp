@@ -146,4 +146,37 @@ void MyTime::showTime() const
 	}
 }
 
+bool MyTime::operator==(const MyTime& obj) const&
+{
+	return this->hour == obj.hour && this->minutes == obj.minutes && this->seconds == obj.seconds;
+}
+
+bool MyTime::operator!=(const MyTime& obj) const&
+{
+	return !(*this == obj);
+}
+
+bool MyTime::operator>(const MyTime& obj) const&
+{
+	if (this->hour > obj.hour) return true;
+	else if (this->hour == obj.hour && this->minutes > obj.minutes) return true;
+	else if (this->hour == obj.hour && this->minutes > obj.minutes && this->seconds > obj.seconds) return true;
+	else return false;
+}
+
+bool MyTime::operator<(const MyTime& obj) const&
+{
+	return !(*this > obj) && *this != obj;
+}
+
+bool MyTime::operator>=(const MyTime& obj) const&
+{
+	return (*this > obj) || (*this == obj);;
+}
+
+bool MyTime::operator<=(const MyTime& obj) const&
+{
+	return !(*this > obj);;
+}
+
 

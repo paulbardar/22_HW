@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <iomanip>
 #include "MyTime.h"
 
 int main()
@@ -32,14 +33,29 @@ int main()
     b.showTime();
     c.showTime();
 
-    MyTime d(25, 61, 10, false);
-    cout << "Does d time is valid?: " << (d.valid() ? "Valid" : "Unvalid") << endl;
+    //MyTime d(25, 61, 10, false);
+    //cout << "Does d time is valid?: " << (d.valid() ? "Valid" : "Unvalid") << endl;
 
     b.tickTime();
     b.showTime();
 
     b.untickTime();
     b.showTime();
+
+    cout << "================================" << endl;
+
+    MyTime d(18, 11, 7, true);
+    MyTime f(8, 21, 18, false);
+
+    d.showTime();
+    f.showTime();
+
+    cout << " d == f: " << boolalpha << (d == f) << endl;
+    cout << " d != f: " << boolalpha << (d != f) << endl;
+    cout << " d > f: " << boolalpha << (d > f) << endl;
+    cout << " d < f: " << boolalpha << (d < f) << endl;
+    cout << " d <= f: " << boolalpha << (d <= f) << endl;
+    cout << " d >= f: " << boolalpha << (d >= f) << endl;
 
     return 0;
 }
