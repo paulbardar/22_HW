@@ -42,6 +42,24 @@ public:
 	bool operator <= (const MyTime& obj)const&;
 
 
+	//--------- Assignment operators ---------	
+	MyTime& operator += (float s);	// add seconds
+	MyTime& operator -= (float s);
+	MyTime& operator += (int m);		// add minutes
+	MyTime& operator -= (int m);
+	MyTime& operator += (long h);	// add hours
+	MyTime& operator -= (long h);
+
+
+	//--------- Arithmetic operators ---------
+	MyTime operator + (float s)const&;	// add seconds
+	MyTime operator - (float s)const&;
+	MyTime operator + (int m)const&; // add minutes
+	MyTime operator - (int m)const&;
+	MyTime operator + (long h)const&; // add hours
+	MyTime operator - (long h)const&;
+
+
 
 
 

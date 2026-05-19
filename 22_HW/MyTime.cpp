@@ -179,4 +179,108 @@ bool MyTime::operator<=(const MyTime& obj) const&
 	return !(*this > obj);;
 }
 
+MyTime& MyTime::operator+=(float s)
+{
+	for (int i = 0; i < s; ++i) {
+		this->tickTime(); 
+	}
+
+	return *this;
+}
+
+MyTime& MyTime::operator-=(float seconds)
+{
+	for (int i = 0; i < seconds; ++i) {
+		this->untickTime();
+	}
+
+	return *this;
+}
+
+MyTime& MyTime::operator+=(int minutes)
+{
+	if (minutes >= 0) {
+		int total_seconds_to_add = minutes * 60;
+		for (int i = 0; i < total_seconds_to_add; ++i) {
+			this->tickTime(); 
+		}
+	}
+	return *this; 
+}
+
+MyTime& MyTime::operator-=(int minutes)
+{
+	if (minutes >= 0) {
+		int total_seconds_to_remove = minutes * 60; 
+		for (int i = 0; i < total_seconds_to_remove; ++i) {
+			this->untickTime();
+		}
+	}
+	return *this;
+}
+
+MyTime& MyTime::operator+=(long hour)
+{
+	if (hour >= 0) {
+		long total_seconds_to_add = hour * 3600; 
+		for (long i = 0; i < total_seconds_to_add; ++i) {
+			this->tickTime();
+		}
+	}
+	return *this;
+}
+
+MyTime& MyTime::operator-=(long hour)
+{
+	if (hour >= 0) {
+		long total_seconds_to_remove = hour * 3600; 
+		for (long i = 0; i < total_seconds_to_remove; ++i) {
+			this->untickTime(); 
+		}
+	}
+	return *this;
+}
+
+MyTime MyTime::operator+(float s) const&
+{
+	MyTime temp(*this); 
+	temp += s; 
+	return temp; 
+}
+
+MyTime MyTime::operator-(float s) const&
+{
+	MyTime temp(*this);
+	temp -= s;
+	return temp;
+}
+
+MyTime MyTime::operator+(int m) const&
+{
+	MyTime temp(*this);
+	temp += m;         
+	return temp;
+}
+
+MyTime MyTime::operator-(int m) const&
+{
+	MyTime temp(*this);
+	temp -= m;
+	return temp;
+}
+
+MyTime MyTime::operator+(long h) const&
+{
+	MyTime temp(*this);
+	temp += h;    
+	return temp;
+}
+
+MyTime MyTime::operator-(long h) const&
+{
+	MyTime temp(*this);
+	temp -= h;
+	return temp;
+}
+
 
